@@ -6,10 +6,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.uda_kotlin.finaltask.R
+import com.uda_kotlin.finaltask.model.getdata.DataItem
 import com.uda_kotlin.finaltask.model.getdata.Pet
 import kotlinx.android.synthetic.main.item_pet.view.*
 
-class RVPetListAdapter(val data: List<Pet>?, val itemClick: OnClickListener) :
+class RVPetListAdapter(val data: List<DataItem>?, val itemClick: OnClickListener) :
     RecyclerView.Adapter<RVPetListAdapter.ViewHolder>() {
 
 
@@ -22,12 +23,14 @@ class RVPetListAdapter(val data: List<Pet>?, val itemClick: OnClickListener) :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
+        val item = data?.get(position)
+
         holder.tv_name.text = data?.get(position)?.nama
         holder.tv_category.text = data?.get(position)?.category
         Glide.with(holder.itemView.context).load(data?.get(position)?.photo).into(holder.iv_photo)
 
         holder.itemView.setOnClickListener {
-            itemClick.detail(data)
+            itemClick.detail(item)
         }
 
     }
@@ -46,6 +49,6 @@ class RVPetListAdapter(val data: List<Pet>?, val itemClick: OnClickListener) :
     }
 
     interface OnClickListener {
-        fun detail(item: List<Pet>?)
+        fun detail(item: DataItem?)
     }
 }

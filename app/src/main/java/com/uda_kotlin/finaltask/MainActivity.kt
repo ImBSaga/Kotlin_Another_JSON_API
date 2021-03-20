@@ -7,6 +7,7 @@ import android.widget.Toast
 import com.uda_kotlin.finaltask.adapter.RVPetListAdapter
 import com.uda_kotlin.finaltask.config.NetworkModule
 import com.uda_kotlin.finaltask.model.action.ResponseAction
+import com.uda_kotlin.finaltask.model.getdata.DataItem
 import com.uda_kotlin.finaltask.model.getdata.Pet
 import com.uda_kotlin.finaltask.model.getdata.ResponseGetData
 import com.uda_kotlin.finaltask.ui.InputActivity
@@ -32,17 +33,17 @@ class MainActivity : AppCompatActivity() {
 
         //getData
         val petList = NetworkModule.service().getData()
-        petList.enqueue(object : Callback<ResponseGetData> {
+        petList.enqueue(object : Callback<com.uda_kotlin.finaltask.model.getdata.Response> {
             override fun onResponse(
-                call: Call<ResponseGetData>,
-                response: Response<ResponseGetData>
+                call: Call<com.uda_kotlin.finaltask.model.getdata.Response>,
+                response: Response<com.uda_kotlin.finaltask.model.getdata.Response>
             ) {
                 if (response.isSuccessful) {
 
                     val item = response.body()?.data
 
                     val adapter = RVPetListAdapter(item, object : RVPetListAdapter.OnClickListener {
-                        override fun detail(item: List<Pet>?) {
+                        override fun detail(item: DataItem?) {
                             TODO("Not yet implemented")
                         }
                     })
@@ -51,7 +52,7 @@ class MainActivity : AppCompatActivity() {
                 }
             }
 
-            override fun onFailure(call: Call<ResponseGetData>, t: Throwable) {
+            override fun onFailure(call: Call<com.uda_kotlin.finaltask.model.getdata.Response>, t: Throwable) {
                 Toast.makeText(applicationContext, t.message, Toast.LENGTH_LONG).show()
             }
         })

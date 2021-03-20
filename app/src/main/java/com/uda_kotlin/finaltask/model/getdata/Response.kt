@@ -1,15 +1,15 @@
 package com.uda_kotlin.finaltask.model.getdata
 
+import com.google.gson.annotations.SerializedName
+
 data class Response(
-	val data: List<DataItem?>? = null,
-	val message: String? = null,
-	val isSuccess: Boolean? = null
-)
 
-data class DataItem(
-	val nama: String? = null,
-	val photo: String? = null,
-	val id: String? = null,
-	val category: String? = null
-)
+    @field:SerializedName("data")
+    val data: List<DataItem>,
 
+    @field:SerializedName("message")
+    val message: String,
+
+    @field:SerializedName("isSuccess")
+    val isSuccess: Boolean
+)
