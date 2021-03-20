@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.uda_kotlin.finaltask.R
 import com.uda_kotlin.finaltask.model.getdata.DataItem
-import com.uda_kotlin.finaltask.model.getdata.Pet
 import kotlinx.android.synthetic.main.item_pet.view.*
 
 class RVPetListAdapter(val data: List<DataItem>?, val itemClick: OnClickListener) :
@@ -33,6 +32,10 @@ class RVPetListAdapter(val data: List<DataItem>?, val itemClick: OnClickListener
             itemClick.detail(item)
         }
 
+        holder.itemView.setOnClickListener {
+            itemClick.hapus(item)
+        }
+
     }
 
     override fun getItemCount(): Int {
@@ -46,9 +49,11 @@ class RVPetListAdapter(val data: List<DataItem>?, val itemClick: OnClickListener
         val tv_name = view.tv_pet_name
         val tv_category = view.tv_pet_category
         val iv_photo = view.iv_pet_photo
+        val btn_hapus = view.btn_hapus
     }
 
     interface OnClickListener {
         fun detail(item: DataItem?)
+        fun hapus(item: DataItem?)
     }
 }

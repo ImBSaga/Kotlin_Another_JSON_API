@@ -1,7 +1,10 @@
 package com.uda_kotlin.finaltask.model.getdata
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class DataItem(
 
     @field:SerializedName("nama")
@@ -15,4 +18,4 @@ data class DataItem(
 
     @field:SerializedName("category")
     val category: String
-)
+) : Parcelable

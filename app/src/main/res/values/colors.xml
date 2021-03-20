@@ -9,4 +9,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="btn_simpan">#00BCD4</color>
     <color name="btn_batal">#F44336</color>
+    <color name="primary_blue">#00BCD4</color>
 </resources>

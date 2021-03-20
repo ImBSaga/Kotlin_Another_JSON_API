@@ -5,6 +5,6 @@ class ResponseGetData {
 
     val isSuccess: Boolean? = null
     val message: String? = null
-    val data: List<Pet>? = null
+    val data: ArrayList<Pet>? = null
 
 }

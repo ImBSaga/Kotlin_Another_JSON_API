@@ -1,20 +1,19 @@
 package com.uda_kotlin.finaltask.config
 
 import com.uda_kotlin.finaltask.model.action.ResponseAction
-import com.uda_kotlin.finaltask.model.getdata.Response
-import com.uda_kotlin.finaltask.model.getdata.ResponseGetData
 import retrofit2.Call
+import retrofit2.Response
 import retrofit2.http.*
 
 interface ApiService {
 
     //getData
     @GET("getData.php")
-    fun getData(): Call<Response>
+    fun getData(): Call<com.uda_kotlin.finaltask.model.getdata.Response>
 
     //getDataById
     @GET("getData.php")
-    fun getDataById(@Query("id") id: String): Call<Response>
+    fun getDataById(@Query("id") id: String): Call<com.uda_kotlin.finaltask.model.getdata.Response>
 
     //insert
     @FormUrlEncoded
@@ -39,5 +38,7 @@ interface ApiService {
     @FormUrlEncoded
     @POST("delete.php")
     fun deleteData(@Field("id") id: String): Call<ResponseAction>
+
+
 
 }
