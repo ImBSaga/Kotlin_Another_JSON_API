@@ -13,7 +13,7 @@ interface ApiService {
 
     //getDataById
     @GET("getData.php")
-    fun getDataById(@Query("id") id: String): Call<com.uda_kotlin.finaltask.model.getdata.Response>
+    fun getDataByCategory(@Query("category") id: String): Call<com.uda_kotlin.finaltask.model.getdata.Response>
 
     //insert
     @FormUrlEncoded

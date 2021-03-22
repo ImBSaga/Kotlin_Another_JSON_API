@@ -96,6 +96,165 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
+    private fun showDataCat() {
+
+        //getData
+        val petList = NetworkModule.service().getDataByCategory("Cat")
+        petList.enqueue(object : Callback<com.uda_kotlin.finaltask.model.getdata.Response> {
+            override fun onResponse(
+                call: Call<com.uda_kotlin.finaltask.model.getdata.Response>,
+                response: Response<com.uda_kotlin.finaltask.model.getdata.Response>
+            ) {
+                if (response.isSuccessful) {
+
+                    val item = response.body()?.data
+
+                    val adapter = RVPetListAdapter(item, object : RVPetListAdapter.OnClickListener {
+                        override fun detail(item: DataItem?) {
+
+                            //Update
+                            val intent = Intent(applicationContext, InputActivity::class.java)
+                            intent.putExtra("data", item)
+                            startActivity(intent)
+                        }
+
+                        override fun hapus(item: DataItem?) {
+
+                            //Delete
+                            AlertDialog.Builder(this@MainActivity).apply {
+                                setTitle("Hapus data")
+                                setMessage("Yakin mau hapus data?")
+                                setPositiveButton("Hapus") { dialog, which ->
+                                    hapusData(item?.id)
+                                    dialog.dismiss()
+                                }
+                                setNegativeButton("Batal") { dialog, which ->
+                                    dialog.dismiss()
+                                }
+                            }.show()
+
+                        }
+                    })
+
+                    rv_pet_list.adapter = adapter
+                }
+            }
+
+            override fun onFailure(
+                call: Call<com.uda_kotlin.finaltask.model.getdata.Response>,
+                t: Throwable
+            ) {
+                Toast.makeText(applicationContext, t.message, Toast.LENGTH_LONG).show()
+            }
+        })
+    }
+
+    private fun showDataDog() {
+
+        //getData
+        val petList = NetworkModule.service().getDataByCategory("Dog")
+        petList.enqueue(object : Callback<com.uda_kotlin.finaltask.model.getdata.Response> {
+            override fun onResponse(
+                call: Call<com.uda_kotlin.finaltask.model.getdata.Response>,
+                response: Response<com.uda_kotlin.finaltask.model.getdata.Response>
+            ) {
+                if (response.isSuccessful) {
+
+                    val item = response.body()?.data
+
+                    val adapter = RVPetListAdapter(item, object : RVPetListAdapter.OnClickListener {
+                        override fun detail(item: DataItem?) {
+
+                            //Update
+                            val intent = Intent(applicationContext, InputActivity::class.java)
+                            intent.putExtra("data", item)
+                            startActivity(intent)
+                        }
+
+                        override fun hapus(item: DataItem?) {
+
+                            //Delete
+                            AlertDialog.Builder(this@MainActivity).apply {
+                                setTitle("Hapus data")
+                                setMessage("Yakin mau hapus data?")
+                                setPositiveButton("Hapus") { dialog, which ->
+                                    hapusData(item?.id)
+                                    dialog.dismiss()
+                                }
+                                setNegativeButton("Batal") { dialog, which ->
+                                    dialog.dismiss()
+                                }
+                            }.show()
+
+                        }
+                    })
+
+                    rv_pet_list.adapter = adapter
+                }
+            }
+
+            override fun onFailure(
+                call: Call<com.uda_kotlin.finaltask.model.getdata.Response>,
+                t: Throwable
+            ) {
+                Toast.makeText(applicationContext, t.message, Toast.LENGTH_LONG).show()
+            }
+        })
+    }
+
+    private fun showDataBird() {
+
+        //getData
+        val petList = NetworkModule.service().getDataByCategory("Bird")
+        petList.enqueue(object : Callback<com.uda_kotlin.finaltask.model.getdata.Response> {
+            override fun onResponse(
+                call: Call<com.uda_kotlin.finaltask.model.getdata.Response>,
+                response: Response<com.uda_kotlin.finaltask.model.getdata.Response>
+            ) {
+                if (response.isSuccessful) {
+
+                    val item = response.body()?.data
+
+                    val adapter = RVPetListAdapter(item, object : RVPetListAdapter.OnClickListener {
+                        override fun detail(item: DataItem?) {
+
+                            //Update
+                            val intent = Intent(applicationContext, InputActivity::class.java)
+                            intent.putExtra("data", item)
+                            startActivity(intent)
+                        }
+
+                        override fun hapus(item: DataItem?) {
+
+                            //Delete
+                            AlertDialog.Builder(this@MainActivity).apply {
+                                setTitle("Hapus data")
+                                setMessage("Yakin mau hapus data?")
+                                setPositiveButton("Hapus") { dialog, which ->
+                                    hapusData(item?.id)
+                                    dialog.dismiss()
+                                }
+                                setNegativeButton("Batal") { dialog, which ->
+                                    dialog.dismiss()
+                                }
+                            }.show()
+
+                        }
+                    })
+
+                    rv_pet_list.adapter = adapter
+                }
+            }
+
+            override fun onFailure(
+                call: Call<com.uda_kotlin.finaltask.model.getdata.Response>,
+                t: Throwable
+            ) {
+                Toast.makeText(applicationContext, t.message, Toast.LENGTH_LONG).show()
+            }
+        })
+    }
+
     private fun hapusData(id: String?) {
 
         val hapus = NetworkModule.service().deleteData(id ?: "")
@@ -151,25 +310,25 @@ class MainActivity : AppCompatActivity() {
                 Log.d("Working", "1")
                 cvCat1?.setCardBackgroundColor(Color.parseColor("#00BCD4"))
                 tvCat1?.setTextColor(Color.WHITE)
-//                configNetworkAll()
+                showData()
             }
             2 -> {
                 Log.d("Working", "2")
                 cvCat2?.setCardBackgroundColor(Color.parseColor("#00BCD4"))
                 tvCat2?.setTextColor(Color.WHITE)
-//                configNetworkEngadget()
+                showDataCat()
             }
             3 -> {
                 Log.d("Working", "3")
                 cvCat3?.setCardBackgroundColor(Color.parseColor("#00BCD4"))
                 tvCat3?.setTextColor(Color.WHITE)
-//                configNetworkReuters()
+                showDataDog()
             }
             4 -> {
                 Log.d("Working", "4")
                 cvCat4?.setCardBackgroundColor(Color.parseColor("#00BCD4"))
                 tvCat4?.setTextColor(Color.WHITE)
-//                configNetworkArsTechnicia()
+                showDataBird()
             }
         }
     }
